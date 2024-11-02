@@ -16,25 +16,7 @@ export function makeHttpReq<TInput, TResponse>(
   method: HttpVerbType,
   input?: TInput
 ) {
-  return new Promise<TResponse>(async (resolve, reject) => {
-    try {
-      // const userData = getUserData()
-      const res = await fetch(`https://job-portal-api-nine.vercel.app/api/v1/user/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        credentials: 'include'
-      })
-      const data: TResponse = await res.json()
-
-      console.log('data', data)
-
-      resolve(data)
-    } catch (error) {
-      reject(error)
-    }
-  })
+  return new Promise<TResponse>(async (resolve, reject) => {})
 }
 export function makeHttpReqLogin<TInput, TResponse>(
   endPoint: string,

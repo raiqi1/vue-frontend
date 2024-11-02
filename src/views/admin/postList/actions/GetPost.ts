@@ -1,5 +1,5 @@
 import { showError } from '@/helper/ToastNofication'
-import { makeHttpGetProduct, makeHttpReq } from '@/helper/makeHttpReq'
+import { makeHttpGetProduct } from '@/helper/makeHttpReq'
 import { ref } from 'vue'
 
 export type GetPostResponseType = {

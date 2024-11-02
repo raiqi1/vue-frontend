@@ -1,6 +1,6 @@
 import { APP } from '@/helper/APP'
 import { showError } from '@/helper/ToastNofication'
-import { makeHttpReq, makeHttpReqLogin } from '@/helper/makeHttpReq'
+import {  makeHttpReqLogin } from '@/helper/makeHttpReq'
 import { ref } from 'vue'
 import { useToast } from 'vue-toastification' // Import useToast
 
