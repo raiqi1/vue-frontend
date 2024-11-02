@@ -21,7 +21,7 @@ function logout() {
         <div class="container-fluid">
           <img src="/src/assets/wizard-logo.png" width="55" alt="" />
           <b>
-            <RouterLink class="navbar-brand" to="/">Wizard Engineer</RouterLink>
+            <RouterLink class="navbar-brand" to="/">Rayiqi Engineer</RouterLink>
           </b>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@ function logout() {
   <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
     <p>
       Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by
-      <a href="https://twitter.com/mdo">@mdo</a>.
+      <a href="">@ramadifan</a>.
     </p>
     <p class="mb-0">
       <a href="#">Back to top</a>
