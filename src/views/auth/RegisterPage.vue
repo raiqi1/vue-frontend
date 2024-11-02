@@ -1,8 +1,34 @@
+<template>
+  <div>
+    <!-- Judul -->
+    <h1 class="text-center">Register</h1>
+    <form @submit.prevent="handleSubmit" class="form">
+      <input type="text" v-model="name" class="form-control mb-2" placeholder="Full Name" required />
+      <input type="email" v-model="email" class="form-control mb-2" placeholder="Email" required />
+      <input type="password" v-model="password" class="form-control mb-2" placeholder="Password" required />
+      <button type="submit" class="btn btn-primary" :disabled="loading">
+        <span v-if="loading">Loading...</span>
+        <span v-else>Register</span>
+      </button>
+    </form>
+    
+    <!-- Tombol Back to Home -->
+    <div class="text-center mt-4">
+      <button @click="goHome" class="btn btn-secondary">
+        <i class="fas fa-home"></i> Back to Home
+      </button>
+    </div>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { APP } from '@/helper/APP';
+import { useRouter } from 'vue-router'; // Import useRouter
+
+const router = useRouter(); // Initialize router
 
 const name = ref('')
 const email = ref('')
@@ -46,23 +72,12 @@ async function handleSubmit() {
     loading.value = false
   }
 }
-</script>
 
-<template>
-  <div>
-    <!-- Judul -->
-    <h1 class="text-center">Register</h1>
-    <form @submit.prevent="handleSubmit" class="form">
-      <input type="text" v-model="name" class="form-control mb-2" placeholder="Full Name" required />
-      <input type="email" v-model="email" class="form-control mb-2" placeholder="Email" required />
-      <input type="password" v-model="password" class="form-control mb-2" placeholder="Password" required />
-      <button type="submit" class="btn btn-primary" :disabled="loading">
-        <span v-if="loading">Loading...</span>
-        <span v-else>Register</span>
-      </button>
-    </form>
-  </div>
-</template>
+// Fungsi untuk navigasi ke home
+function goHome() {
+  router.push('/'); // Ganti dengan rute home yang sesuai
+}
+</script>
 
 <style>
 .text-center {

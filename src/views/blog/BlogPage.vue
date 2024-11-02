@@ -11,6 +11,8 @@ function logout() {
   successMsg('Logout berhasil')
   window.location.href = '/login'; // Arahkan ke halaman login setelah logout
 }
+
+
 </script>
 
 <template>
@@ -53,6 +55,7 @@ function logout() {
       </nav>
 
       <RouterView />
+      
     </div>
   </div>
   <footer class="py-5 text-center text-body-secondary bg-body-tertiary">

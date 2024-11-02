@@ -8,6 +8,7 @@ const userData = localStorage.getItem("token");
 const userId = ref<number | null>(null);
 const name = ref<string | null>(null);
 const cart = ref<{ name: string; quantity: number }[]>([]);
+const isLoading = ref(false); // Tambahkan ref untuk loading
 
 // Ambil user ID dan nama user dari API
 const fetchUserId = async () => {
@@ -19,6 +20,11 @@ const fetchUserId = async () => {
         Authorization: `Bearer ${userData}`,
       },
     });
+
+    if (res.status === 401) {
+      router.push("/login");
+    }
+
     const data = await res.json();
     userId.value = data.user.id;
     name.value = data.user.name;
@@ -52,6 +58,7 @@ const deleteCartItem = (index: number) => {
 const submitCart = async () => {
   try {
     if (userId.value) {
+      isLoading.value = true; // Set loading ke true saat mulai proses
       const res = await fetch(`${APP.nodeApiBaseURL}/transaksi/create-transaksi`, {
         method: "POST",
         headers: {
@@ -67,7 +74,8 @@ const submitCart = async () => {
       const data = await res.json();
       console.log("Response:", data);
 
-      // Jika transaksi berhasil, kosongkan cart, hapus dari localStorage, dan arahkan ke halaman admin
+      // jika res nya unauthorized make ke login 
+
       cart.value = [];
       localStorage.removeItem("cart");
       router.push("/admin");
@@ -76,10 +84,11 @@ const submitCart = async () => {
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    isLoading.value = false; // Set loading ke false setelah proses selesai
   }
 };
 
-// Panggil fungsi loadCart dan fetchUserId saat komponen dimuat
 onMounted(() => {
   fetchUserId();
   loadCart();
@@ -105,7 +114,10 @@ onMounted(() => {
       </ul>
       <p v-else>Tidak ada belanjaan di keranjang</p>
     </div>
-    <button @click="submitCart" :disabled="cart.length === 0">Submit Cart</button>
+    <button @click="submitCart" :disabled="cart.length === 0 || isLoading" class="btn-submit">
+      <span v-if="isLoading">Loading...</span>
+      <span v-else>Submit Cart</span>
+    </button>
   </main>
 </template>
 
@@ -113,7 +125,6 @@ onMounted(() => {
 .container {
   background-color: #f8f9fa;
   padding: 0;
-  margin: 0;
   margin: 10vw;
 }
 
@@ -151,5 +162,26 @@ onMounted(() => {
   color: white;
   cursor: pointer;
   margin-left: 10px;
+}
+
+.btn-submit {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.btn-submit:not(:disabled):hover {
+  background-color: #218838;
 }
 </style>

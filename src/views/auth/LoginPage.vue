@@ -23,6 +23,10 @@ async function submitLogin() {
   await performLogin()
 
 }
+
+function goHome() {
+  window.location.href = '/'
+}
 </script>
 <template>
   <div class="row">
@@ -52,7 +56,11 @@ async function submitLogin() {
           </div>
         </div>
       </div>
-      <div class="col-md-4"></div>
+      <div class="text-center mt-4">
+      <button @click="goHome" class="btn btn-secondary">
+        <i class="fas fa-home"></i> Back to Home
+      </button>
+    </div>
     </div>
   </div>
 </template>
