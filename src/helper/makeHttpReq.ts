@@ -73,6 +73,12 @@ export function makeHttpGetProduct<TInput, TResponse>(
       )
       const data: TResponse = await res.json()
 
+      // jika responsenya unauthorized maka pindah ke halaman login  
+      if(res.status === 401) {
+        window.location.href = '/login'
+      }
+      
+
       console.log('data Product', data)
 
       resolve(data)

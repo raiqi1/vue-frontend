@@ -35,6 +35,10 @@ function logout() {
               "></i> Cart
             </RouterLink>
             <form class="d-flex" role="search">
+              <!-- link to admin  -->
+
+              <RouterLink v-if="token" class="btn btn-outline-primary btn-lg" type="submit" to="/admin">Admin <i
+                  class="bi bi-box-arrow-in-right"></i></RouterLink>
 
               <RouterLink v-if="!token" class="btn btn-outline-primary btn-lg" type="submit" to="/login">Login <i
                   class="bi bi-box-arrow-in-right"></i></RouterLink>
