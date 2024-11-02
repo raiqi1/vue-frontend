@@ -66,7 +66,7 @@ const deleteTransaksi = async (transaksiId: number) => {
   const token = localStorage.getItem("token");
   loading.value = true;
   try {
-    const response = await fetch(`http://localhost:5000/api/transaksi/${transaksiId}`, {
+    const response = await fetch(`${APP.nodeApiBaseURL}/transaksi/${transaksiId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
