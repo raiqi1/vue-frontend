@@ -50,26 +50,25 @@ export function makeHttpReqLogin<TInput, TResponse>(
         },
         body: JSON.stringify(input),
         credentials: 'include'
-      });
+      })
 
       // Check if the response is not OK (status outside the range 200-299)
       if (!res.ok) {
         // Extract error message from the response
-        const errorData = await res.json();
+        const errorData = await res.json()
         // Reject with the error message from the server
-        reject(new Error(errorData.message || 'An error occurred'));
-        return; // Exit the function
+        reject(new Error(errorData.message || 'An error occurred'))
+        return // Exit the function
       }
 
-      const data: TResponse = await res.json();
-      console.log('dataLogin', data);
-      resolve(data);
+      const data: TResponse = await res.json()
+      console.log('dataLogin', data)
+      resolve(data)
     } catch (error) {
-      reject(error); // Reject with the error from fetch
+      reject(error) // Reject with the error from fetch
     }
-  });
+  })
 }
-
 
 export function makeHttpGetProduct<TInput, TResponse>(
   endPoint: string,
@@ -79,15 +78,17 @@ export function makeHttpGetProduct<TInput, TResponse>(
   return new Promise<TResponse>(async (resolve, reject) => {
     try {
       // const userData = getUserData()
-      const res = await fetch(`https://api-loan-production.up.railway.app/api/products/all-products`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        },
-        // body: JSON.stringify(input),
-        credentials: 'include'
-      })
+      const res = await fetch(
+        `https://api-loan-production.up.railway.app/api/products/all-products`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+          // body: JSON.stringify(input),
+        }
+      )
       const data: TResponse = await res.json()
 
       console.log('data Product', data)
@@ -103,10 +104,13 @@ export function makeHttpReqAllProduct<TResponse>() {
   return new Promise<TResponse>(async (resolve, reject) => {
     try {
       // const userData = getUserData()
-      const res = await fetch(`https://api-loan-production.up.railway.app/api/products/all-product`, {
-        method: 'GET'
-        // body: JSON.stringify(posts)
-      })
+      const res = await fetch(
+        `https://api-loan-production.up.railway.app/api/products/all-product`,
+        {
+          method: 'GET'
+          // body: JSON.stringify(posts)
+        }
+      )
       const data: TResponse = await res.json()
 
       console.log('dataPost', data)

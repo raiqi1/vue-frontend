@@ -34,7 +34,6 @@ async function createPost(name: string) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       },
-      withCredentials: true,
     });
     // const idCompany = response.data.company._id;
     // console.log("idCompany", idCompany);
