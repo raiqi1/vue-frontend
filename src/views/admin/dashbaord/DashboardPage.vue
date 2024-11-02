@@ -36,13 +36,13 @@ const fetchTransaksiData = async () => {
     if (!response.ok) {
       if (response.status === 401) {
         // Redirect ke halaman login jika unauthorized
-        window.location.href = "/login"; // Ganti dengan path login yang sesuai
+        window.location.href = "/login"; 
       }
       throw new Error("Failed to fetch data");
     }
 
     const data = await response.json();
-    console.log("Data diterima dari API:", data); // Menampilkan data yang diterima
+    console.log("Data diterima dari API:", data); 
 
     // Akses data transaksi dari data.data
     if (Array.isArray(data.data) && data.data.length > 0) {
@@ -51,11 +51,12 @@ const fetchTransaksiData = async () => {
       console.log("Data transaksiList diatur:", transaksiList.value);
     } else {
       console.log("Data yang diterima tidak valid. Data:", data);
+      transaksiList.value = [];
     }
   } catch (error) {
     console.error("Terjadi kesalahan:", error);
   } finally {
-    loading.value = false; // Set loading ke false setelah proses selesai
+    loading.value = false; 
   }
 };
 
@@ -63,9 +64,9 @@ const deleteTransaksi = async (transaksiId: number) => {
   const confirmed = await confirmDelation();
   if (!confirmed) return;
   const token = localStorage.getItem("token");
-  loading.value = true; // Set loading ke true saat mulai penghapusan
+  loading.value = true;
   try {
-    const response = await fetch(`${APP.nodeApiBaseURL}/transaksi/${transaksiId}`, {
+    const response = await fetch(`http://localhost:5000/api/transaksi/${transaksiId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -75,23 +76,23 @@ const deleteTransaksi = async (transaksiId: number) => {
 
     if (response.ok) {
       console.log("Transaksi berhasil dihapus");
-      await fetchTransaksiData(); // Memuat ulang data transaksi
+      await fetchTransaksiData(); 
     } else {
       console.error("Gagal menghapus transaksi:", response.statusText);
     }
   } catch (error) {
     console.error("Terjadi kesalahan:", error);
   } finally {
-    loading.value = false; // Set loading ke false setelah proses selesai
+    loading.value = false; 
   }
 };
 
-// Watch untuk mendeteksi perubahan pada transaksiList
+
 watch(transaksiList, (newValue) => {
   console.log("transaksiList diubah:", newValue);
 });
 
-// Mengambil data saat komponen dimuat
+
 onMounted(() => {
   fetchTransaksiData();
 });
